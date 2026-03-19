@@ -22,15 +22,6 @@
   flex-direction: column;
 }
 
-#topbar {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px;
-  background: #007bff;
-  color: white;
-}
-
 /* weekdays */
 #weekdays {
   display: grid;
@@ -146,24 +137,38 @@
 #topbar {
   display: flex;
   align-items: center;
-  gap: 10px;
   padding: 12px;
   background: linear-gradient(135deg, #007bff, #0056b3);
-  color: white;
-  font-weight: bold;
+  gap: 10px;
 }
 
 #menuBtn {
   background: transparent;
   border: none;
-  color: white;
   font-size: 20px;
+  color: white;
   cursor: pointer;
-  transition: 0.2s;
 }
 
-#menuBtn:hover {
-  transform: scale(1.2);
+#monthControls {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* centro horizontal */
+  align-items: center;
+  gap: 10px;
+}
+
+#monthControls button {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#monthLabel {
+  font-weight: bold;
 }
 
 #sidebar {
