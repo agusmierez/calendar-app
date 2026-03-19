@@ -127,6 +127,28 @@ document.getElementById("menuBtn").addEventListener("click", () => {
   sidebar.classList.toggle("hidden");
 });
 
+document.getElementById("prevMonth").addEventListener("click", () => {
+  currentMonth--;
+
+  if (currentMonth < 1) {
+    currentMonth = 12;
+    currentYear--;
+  }
+
+  updateCalendar();
+});
+
+document.getElementById("nextMonth").addEventListener("click", () => {
+  currentMonth++;
+
+  if (currentMonth > 12) {
+    currentMonth = 1;
+    currentYear++;
+  }
+
+  updateCalendar();
+});
+
 // modal
 document.getElementById("closeBtn").onclick = () => modal.classList.add("hidden");
 
