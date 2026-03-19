@@ -38,11 +38,53 @@ function createDayElement(date, dayNumber) {
 
   const dayEvents = getEventsByDate(events, date);
 
-  dayEvents.forEach(e => {
+    dayEvents.forEach(e => {
     const ev = document.createElement("div");
     ev.textContent = e.text;
+
+    let clickTimeout = null;
+
+    // 🗑️ BORRAR
+    ev.addEventListener("click", (event) => {
+        event.stopPropagation();
+
+        // limpiamos por si acaso
+        if (clickTimeout) clearTimeout(clickTimeout);
+
+        clickTimeout = setTimeout(() => {
+        const confirmDelete = confirm("¿Borrar este evento?");
+        if (!confirmDelete) return;
+
+        events = deleteEvent(events, e.id);
+        saveEvents(events);
+
+        updateCalendar();
+        }, 250);
+    });
+
+    // ✏️ EDITAR
+    ev.addEventListener("dblclick", (event) => {
+        event.stopPropagation();
+
+        // 🔥 cancelar SIEMPRE el delete
+        if (clickTimeout) {
+        clearTimeout(clickTimeout);
+        clickTimeout = null;
+        }
+
+        const newText = prompt("Editar evento:", e.text);
+
+        // 👉 si cancela, simplemente salimos (ya no hay delete pendiente)
+        if (!newText) return;
+
+        e.text = newText;
+
+        saveEvents(events);
+        updateCalendar();
+    });
+
     eventsContainer.appendChild(ev);
-  });
+    });
 
   day.appendChild(number);
   day.appendChild(eventsContainer);
@@ -50,6 +92,14 @@ function createDayElement(date, dayNumber) {
   day.addEventListener("click", () => {
     onDayClick(date);
   });
+
+    const today = new Date();
+
+    const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+
+    if (date === todayStr) {
+    day.classList.add("today");
+    }
 
   return day;
 }
@@ -64,6 +114,10 @@ function onDayClick(date) {
   saveEvents(events);
 
   updateCalendar(); // 🔥 cambio clave
+}
+
+function deleteEvent(events, eventId) {
+  return events.filter(e => e.id !== eventId);
 }
 
 function renderCalendar(year, month) {
