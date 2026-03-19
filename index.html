@@ -1,43 +1,49 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>TU calendario</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Calendario</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
 
-    <h1>Calendario</h1>
+        <div id="app">
 
-    <div id="controls">
-    <button id="prevMonth">←</button>
-    <span id="monthLabel"></span>
-    <button id="nextMonth">→</button>
-    </div>
+            <!-- 📚 SIDEBAR -->
+            <aside id="sidebar" class="hidden">
+                <h3>Años</h3>
+                <div id="yearsList"></div>
+            </aside>
 
-    <div id="weekdays">
-        <div>Lun</div>
-        <div>Mar</div>
-        <div>Mié</div>
-        <div>Jue</div>
-        <div>Vie</div>
-        <div>Sáb</div>
-        <div>Dom</div>
-    </div>
+            <!-- 📱 MAIN -->
+            <main id="main">
 
-    <div id="calendar"></div>
+                <header id="topbar">
+                <button id="menuBtn">☰</button>
+                <span id="monthLabel"></span>
+                </header>
 
-  <script type="module" src="main.js"></script>
+                <div id="weekdays">
+                <div>Lun</div><div>Mar</div><div>Mié</div>
+                <div>Jue</div><div>Vie</div><div>Sáb</div><div>Dom</div>
+                </div>
 
-    <div id="eventModal" class="modal hidden">
-        <div class="modal-content">
-            <p id="modalText"></p>
+                <div id="calendar"></div>
 
-            <button id="editBtn">Editar</button>
-            <button id="deleteBtn">Borrar</button>
-            <button id="closeBtn">Cerrar</button>
+            </main>
         </div>
-    </div>
 
-</body>
+        <!-- 🪟 MODAL -->
+        <div id="eventModal" class="modal hidden">
+            <div class="modal-content">
+                <p id="modalText"></p>
+
+                <button id="editBtn">Editar</button>
+                <button id="deleteBtn">Borrar</button>
+                <button id="closeBtn">Cerrar</button>
+            </div>
+        </div>
+
+        <script type="module" src="main.js"></script>
+    </body>
 </html>

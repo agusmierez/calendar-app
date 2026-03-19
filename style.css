@@ -1,94 +1,94 @@
-/* 📅 GRID DEL CALENDARIO */
-#calendar {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
-  max-width: 800px;
-  margin: 20px auto;
-
-  grid-auto-rows: 100px; /* 🔥 todas las filas iguales */
+/* layout */
+#app {
+  display: flex;
+  height: 100vh;
 }
 
-/* 📦 CADA DÍA */
-.day {
-  border: 1px solid #ccc;
-  height: 100%;
-  padding: 5px;
+#sidebar {
+  width: 250px;
+  background: #1e1e2f;
+  color: white;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+#sidebar.hidden {
+  display: none;
+}
+
+#main {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  background: white;
-
-  overflow: hidden; /* 🔥 evita que se rompa */
 }
 
-.day:hover {
-  background: #f5f5f5;
+#topbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: #007bff;
+  color: white;
 }
 
-/* 🔢 número del día */
-.day div:first-child {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-/* 📦 CONTENEDOR DE EVENTOS */
-.events-container {
-  flex: 1;
-  overflow-y: auto; /* 🔥 scroll interno */
-}
-
-/* 📆 WEEKDAYS */
+/* weekdays */
 #weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  max-width: 800px;
-  margin: auto;
   text-align: center;
   font-weight: bold;
 }
 
-/* 🎛️ CONTROLES */
-#controls {
+/* calendario */
+#calendar {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 5px;
+  padding: 10px;
+}
+
+/* día */
+.day {
+  border: 1px solid #ccc;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-  margin: 10px;
+  flex-direction: column;
+  padding: 5px;
+  overflow: hidden;
+  background: white;
 }
 
-#controls button {
-  padding: 5px 10px;
-  cursor: pointer;
+.events-container {
+  flex: 1;
+  overflow-y: auto;
 }
 
-/* 📍 DÍA ACTUAL */
-.today {
-  border: 2px solid #007bff;
-  background: #007bff;
-  color: white;
-}
-
-/* 🟦 EVENTO (preview corto) */
+/* evento */
 .event-item {
   background: #007bff;
   color: white;
-  padding: 4px 6px;
-  margin-top: 4px;
-  border-radius: 6px;
+  padding: 3px;
+  margin-top: 3px;
+  border-radius: 4px;
   font-size: 12px;
-
-  cursor: pointer;
 
   overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis; /* 🔥 recorta texto */
+  text-overflow: ellipsis;
+  cursor: pointer;
 }
 
 .event-item:hover {
   background: #0056b3;
 }
 
-/* 🪟 MODAL */
+/* hoy */
+.today {
+  border: 2px solid #007bff;
+}
+
+/* modal */
 .modal {
   position: fixed;
   top: 0;
@@ -110,24 +110,4 @@
   background: white;
   padding: 20px;
   border-radius: 10px;
-  min-width: 250px;
-  max-width: 300px;
-}
-
-/* botones modal */
-.modal-content button {
-  margin-top: 10px;
-  margin-right: 5px;
-  padding: 5px 10px;
-  cursor: pointer;
-}
-
-/* 🧼 scrollbar (opcional pero pro) */
-.events-container::-webkit-scrollbar {
-  width: 4px;
-}
-
-.events-container::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 4px;
 }
