@@ -1,30 +1,43 @@
+/* 📅 GRID DEL CALENDARIO */
 #calendar {
   display: grid;
-  grid-template-columns: repeat(7, 1fr); /* 7 días */
+  grid-template-columns: repeat(7, 1fr);
   gap: 5px;
   max-width: 800px;
   margin: 20px auto;
+
+  grid-auto-rows: 100px; /* 🔥 todas las filas iguales */
 }
 
+/* 📦 CADA DÍA */
 .day {
   border: 1px solid #ccc;
-  min-height: 100px;
+  height: 100%;
   padding: 5px;
   display: flex;
   flex-direction: column;
-  cursor: pointer;
   background: white;
+
+  overflow: hidden; /* 🔥 evita que se rompa */
 }
 
 .day:hover {
   background: #f5f5f5;
 }
 
+/* 🔢 número del día */
 .day div:first-child {
   font-weight: bold;
   margin-bottom: 5px;
 }
 
+/* 📦 CONTENEDOR DE EVENTOS */
+.events-container {
+  flex: 1;
+  overflow-y: auto; /* 🔥 scroll interno */
+}
+
+/* 📆 WEEKDAYS */
 #weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -34,20 +47,7 @@
   font-weight: bold;
 }
 
-.day div:nth-child(2) div {
-  font-size: 12px;
-  background: #007bff;
-  color: white;
-  padding: 2px 4px;
-  margin-top: 2px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.day div:nth-child(2) div:hover {
-  opacity: 0.8;
-}
-
+/* 🎛️ CONTROLES */
 #controls {
   display: flex;
   justify-content: center;
@@ -61,8 +61,73 @@
   cursor: pointer;
 }
 
+/* 📍 DÍA ACTUAL */
 .today {
   border: 2px solid #007bff;
   background: #007bff;
   color: white;
+}
+
+/* 🟦 EVENTO (preview corto) */
+.event-item {
+  background: #007bff;
+  color: white;
+  padding: 4px 6px;
+  margin-top: 4px;
+  border-radius: 6px;
+  font-size: 12px;
+
+  cursor: pointer;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; /* 🔥 recorta texto */
+}
+
+.event-item:hover {
+  background: #0056b3;
+}
+
+/* 🪟 MODAL */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  min-width: 250px;
+  max-width: 300px;
+}
+
+/* botones modal */
+.modal-content button {
+  margin-top: 10px;
+  margin-right: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* 🧼 scrollbar (opcional pero pro) */
+.events-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.events-container::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
 }

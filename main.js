@@ -7,10 +7,14 @@ let currentYear = currentDate.getFullYear();
 let currentMonth = currentDate.getMonth() + 1;
 
 let events = loadEvents();
+let selectedEvent = null;
 
 // 🔵 DOM
 const calendarContainer = document.getElementById("calendar");
 const monthLabel = document.getElementById("monthLabel");
+
+const modal = document.getElementById("eventModal");
+const modalText = document.getElementById("modalText");
 
 // 🟢 DATOS
 const monthNames = [
@@ -31,75 +35,47 @@ function createDayElement(date, dayNumber) {
   day.classList.add("day");
   day.dataset.date = date;
 
+  // número del día
   const number = document.createElement("div");
   number.textContent = dayNumber;
 
   const eventsContainer = document.createElement("div");
+    eventsContainer.classList.add("events-container");
 
   const dayEvents = getEventsByDate(events, date);
 
-    dayEvents.forEach(e => {
+  dayEvents.forEach(e => {
     const ev = document.createElement("div");
+    ev.classList.add("event-item");
     ev.textContent = e.text;
 
-    let clickTimeout = null;
-
-    // 🗑️ BORRAR
+    // 🔥 abrir modal
     ev.addEventListener("click", (event) => {
-        event.stopPropagation();
+      event.stopPropagation();
 
-        // limpiamos por si acaso
-        if (clickTimeout) clearTimeout(clickTimeout);
-
-        clickTimeout = setTimeout(() => {
-        const confirmDelete = confirm("¿Borrar este evento?");
-        if (!confirmDelete) return;
-
-        events = deleteEvent(events, e.id);
-        saveEvents(events);
-
-        updateCalendar();
-        }, 250);
-    });
-
-    // ✏️ EDITAR
-    ev.addEventListener("dblclick", (event) => {
-        event.stopPropagation();
-
-        // 🔥 cancelar SIEMPRE el delete
-        if (clickTimeout) {
-        clearTimeout(clickTimeout);
-        clickTimeout = null;
-        }
-
-        const newText = prompt("Editar evento:", e.text);
-
-        // 👉 si cancela, simplemente salimos (ya no hay delete pendiente)
-        if (!newText) return;
-
-        e.text = newText;
-
-        saveEvents(events);
-        updateCalendar();
+      selectedEvent = e;
+      modalText.textContent = e.text;
+      modal.classList.remove("hidden");
     });
 
     eventsContainer.appendChild(ev);
-    });
+  });
 
   day.appendChild(number);
   day.appendChild(eventsContainer);
 
+  // click en día → crear evento
   day.addEventListener("click", () => {
     onDayClick(date);
   });
 
-    const today = new Date();
+  // 🔥 marcar hoy
+  const today = new Date();
+  const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
 
-    const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
-
-    if (date === todayStr) {
+  if (date === todayStr) {
     day.classList.add("today");
-    }
+  }
 
   return day;
 }
@@ -113,11 +89,7 @@ function onDayClick(date) {
   events = addEvent(events, newEvent);
   saveEvents(events);
 
-  updateCalendar(); // 🔥 cambio clave
-}
-
-function deleteEvent(events, eventId) {
-  return events.filter(e => e.id !== eventId);
+  updateCalendar();
 }
 
 function renderCalendar(year, month) {
@@ -128,11 +100,13 @@ function renderCalendar(year, month) {
 
   const startDay = firstDay === 0 ? 6 : firstDay - 1;
 
+  // espacios vacíos
   for (let i = 0; i < startDay; i++) {
     const empty = document.createElement("div");
     calendarContainer.appendChild(empty);
   }
 
+  // días
   for (let i = 1; i <= daysInMonth; i++) {
     const date = `${year}-${String(month).padStart(2, "0")}-${String(i).padStart(2, "0")}`;
     const dayEl = createDayElement(date, i);
@@ -147,7 +121,7 @@ function updateCalendar() {
   updateMonthLabel();
 }
 
-// 👇 BOTONES
+// 🎛️ BOTONES MES
 document.getElementById("prevMonth").addEventListener("click", () => {
   currentMonth--;
 
@@ -170,5 +144,36 @@ document.getElementById("nextMonth").addEventListener("click", () => {
   updateCalendar();
 });
 
-// 🚀 INICIO
+// 🪟 MODAL
+
+// cerrar
+document.getElementById("closeBtn").addEventListener("click", () => {
+  modal.classList.add("hidden");
+});
+
+// editar
+document.getElementById("editBtn").addEventListener("click", () => {
+  const newText = prompt("Editar evento:", selectedEvent.text);
+  if (!newText) return;
+
+  selectedEvent.text = newText;
+
+  saveEvents(events);
+  updateCalendar();
+  modal.classList.add("hidden");
+});
+
+// borrar
+document.getElementById("deleteBtn").addEventListener("click", () => {
+  const confirmDelete = confirm("¿Borrar este evento?");
+  if (!confirmDelete) return;
+
+  events = events.filter(e => e.id !== selectedEvent.id);
+  saveEvents(events);
+
+  updateCalendar();
+  modal.classList.add("hidden");
+});
+
+// 🚀 INIT
 updateCalendar();

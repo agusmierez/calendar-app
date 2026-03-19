@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Calendario</title>
+  <title>TU calendario</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,5 +28,16 @@
     <div id="calendar"></div>
 
   <script type="module" src="main.js"></script>
+
+    <div id="eventModal" class="modal hidden">
+        <div class="modal-content">
+            <p id="modalText"></p>
+
+            <button id="editBtn">Editar</button>
+            <button id="deleteBtn">Borrar</button>
+            <button id="closeBtn">Cerrar</button>
+        </div>
+    </div>
+
 </body>
 </html>
