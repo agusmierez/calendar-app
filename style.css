@@ -235,6 +235,10 @@
   overflow: hidden;
 }
 
+.event-item:hover .event-actions {
+  opacity: 1;
+}
+
 /* texto */
 .event-item span {
   flex: 1;
@@ -247,6 +251,8 @@
 .event-actions {
   display: flex;
   gap: 3px;
+  opacity: 0;
+  transition: 0.2s;
 }
 
 /* botones */
