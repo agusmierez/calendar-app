@@ -46,49 +46,7 @@ function createDayElement(date, dayNumber) {
     ev.classList.add("event-item");
 
     // texto
-    const text = document.createElement("span");
-    text.textContent = e.text;
-
-    // contenedor de acciones
-    const actions = document.createElement("div");
-    actions.classList.add("event-actions");
-
-    // botón editar
-    const editBtn = document.createElement("button");
-    editBtn.textContent = "✏️";
-
-    editBtn.addEventListener("click", (event) => {
-      event.stopPropagation();
-
-      const newText = prompt("Editar evento:", e.text);
-      if (!newText) return;
-
-      e.text = newText;
-      saveEvents(events);
-      renderCalendar(currentYear, currentMonth);
-    });
-
-    // botón borrar
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "🗑";
-
-    deleteBtn.addEventListener("click", (event) => {
-      event.stopPropagation();
-
-      const confirmDelete = confirm("¿Eliminar evento?");
-      if (!confirmDelete) return;
-
-      events = events.filter(evItem => evItem !== e);
-      saveEvents(events);
-      renderCalendar(currentYear, currentMonth);
-    });
-
-    // armar estructura
-    actions.appendChild(editBtn);
-    actions.appendChild(deleteBtn);
-
-    ev.appendChild(text);
-    ev.appendChild(actions);
+    ev.textContent = e.text;
 
     ev.addEventListener("click", (event) => {
       event.stopPropagation();
