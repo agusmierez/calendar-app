@@ -15,6 +15,7 @@ const yearsList = document.getElementById("yearsList");
 
 const modal = document.getElementById("eventModal");
 const modalText = document.getElementById("modalText");
+const modalInput = document.getElementById("modalInput");
 
 // meses
 const monthNames = [
@@ -51,7 +52,7 @@ function createDayElement(date, dayNumber) {
     ev.addEventListener("click", (event) => {
       event.stopPropagation();
       selectedEvent = e;
-      modalText.textContent = e.text;
+      modalInput.value = e.text;  
       modal.classList.remove("hidden");
     });
 
@@ -154,15 +155,19 @@ document.getElementById("nextMonth").addEventListener("click", () => {
 // modal
 document.getElementById("closeBtn").onclick = () => modal.classList.add("hidden");
 
-document.getElementById("editBtn").onclick = () => {
-  const text = prompt("Editar:", selectedEvent.text);
-  if (!text) return;
+saveBtn.addEventListener("click", () => {
+  if (!selectedEvent) return;
 
-  selectedEvent.text = text;
+  const newText = modalInput.value.trim();
+  if (!newText) return;
+
+  selectedEvent.text = newText;
+
   saveEvents(events);
   updateCalendar();
+
   modal.classList.add("hidden");
-};
+});
 
 document.getElementById("deleteBtn").onclick = () => {
   if (!confirm("¿Borrar?")) return;
