@@ -131,7 +131,10 @@ function renderYears() {
       m.classList.add("month-item");
       m.style.cursor = "pointer";
       m.style.fontSize = "14px";
-      
+
+      if (y === currentYear && index + 1 === currentMonth) {
+        m.classList.add("active-month");
+      }
 
       m.addEventListener("click", () => {
         currentYear = y;
@@ -144,8 +147,22 @@ function renderYears() {
 
     // toggle meses
     yearTitle.addEventListener("click", () => {
-      monthsContainer.style.display =
-        monthsContainer.style.display === "none" ? "block" : "none";
+      const isOpen = monthsContainer.style.display === "block";
+
+      // cerrar todos
+      document.querySelectorAll(".months-container").forEach(el => {
+        el.style.display = "none";
+      });
+
+      document.querySelectorAll(".year-item").forEach(el => {
+        el.classList.remove("active-year");
+      });
+
+      // abrir este
+      if (!isOpen) {
+        monthsContainer.style.display = "block";
+        yearTitle.classList.add("active-year");
+      }
     });
 
     yearContainer.appendChild(yearTitle);
