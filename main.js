@@ -111,16 +111,47 @@ function renderYears() {
   yearsList.innerHTML = "";
 
   for (let y = 2020; y <= 2035; y++) {
-    const el = document.createElement("div");
-    el.textContent = y;
-    el.style.cursor = "pointer";
+    const yearContainer = document.createElement("div");
 
-    el.addEventListener("click", () => {
-      currentYear = y;
-      updateCalendar();
+    const yearTitle = document.createElement("div");
+    yearTitle.textContent = y;
+    yearTitle.classList.add("year-item");
+    yearTitle.style.cursor = "pointer";
+    yearTitle.style.fontWeight = "bold";
+
+    const monthsContainer = document.createElement("div");
+    monthsContainer.classList.add("months-container");
+    monthsContainer.style.display = "none";
+    monthsContainer.style.paddingLeft = "10px";
+
+    // crear meses
+    monthNames.forEach((month, index) => {
+      const m = document.createElement("div");
+      m.textContent = month;
+      m.classList.add("month-item");
+      m.style.cursor = "pointer";
+      m.style.fontSize = "14px";
+      
+
+      m.addEventListener("click", () => {
+        currentYear = y;
+        currentMonth = index + 1;
+        updateCalendar();
+      });
+
+      monthsContainer.appendChild(m);
     });
 
-    yearsList.appendChild(el);
+    // toggle meses
+    yearTitle.addEventListener("click", () => {
+      monthsContainer.style.display =
+        monthsContainer.style.display === "none" ? "block" : "none";
+    });
+
+    yearContainer.appendChild(yearTitle);
+    yearContainer.appendChild(monthsContainer);
+
+    yearsList.appendChild(yearContainer);
   }
 }
 
