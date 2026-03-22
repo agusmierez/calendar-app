@@ -213,6 +213,15 @@ document.getElementById("nextMonth").addEventListener("click", () => {
   updateCalendar();
 });
 
+document.getElementById("todayBtn").addEventListener("click", () => {
+  const today = new Date();
+
+  currentYear = today.getFullYear();
+  currentMonth = today.getMonth() + 1;
+
+  updateCalendar(); // 🔥 clave
+});
+
 // modal
 document.getElementById("closeBtn").onclick = () => modal.classList.add("hidden");
 

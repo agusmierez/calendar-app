@@ -322,3 +322,11 @@
 .months-container {
   display: none;
 }
+
+#todayBtn {
+  background: #28a745;
+}
+
+#todayBtn:hover {
+  background: #218838;
+}
