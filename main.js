@@ -104,6 +104,7 @@ function renderCalendar(year, month) {
 function updateCalendar() {
   renderCalendar(currentYear, currentMonth);
   updateMonthLabel();
+  renderYears();
 }
 
 // sidebar años
@@ -124,6 +125,10 @@ function renderYears() {
     monthsContainer.style.display = "none";
     monthsContainer.style.paddingLeft = "10px";
 
+    if (y === currentYear) {
+      yearTitle.classList.add("active-year");
+    }
+
     // crear meses
     monthNames.forEach((month, index) => {
       const m = document.createElement("div");
@@ -132,6 +137,8 @@ function renderYears() {
       m.style.cursor = "pointer";
       m.style.fontSize = "14px";
 
+      m.classList.remove("active-month"); // 🔥 asegura reset
+
       if (y === currentYear && index + 1 === currentMonth) {
         m.classList.add("active-month");
       }
@@ -139,7 +146,9 @@ function renderYears() {
       m.addEventListener("click", () => {
         currentYear = y;
         currentMonth = index + 1;
-        updateCalendar();
+
+        updateCalendar(); // 🔥 esto re-renderiza todo
+
       });
 
       monthsContainer.appendChild(m);
@@ -154,11 +163,15 @@ function renderYears() {
         el.style.display = "none";
       });
 
+      // sacar selección
       document.querySelectorAll(".year-item").forEach(el => {
         el.classList.remove("active-year");
       });
 
-      // abrir este
+      // 🔥 SIEMPRE marcar el actual clickeado
+      yearTitle.classList.add("active-year");
+
+      // toggle apertura
       if (!isOpen) {
         monthsContainer.style.display = "block";
         yearTitle.classList.add("active-year");

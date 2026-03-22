@@ -190,6 +190,11 @@
   background: #2e2e4f;
 }
 
+#yearsList .active-month {
+  background: #007bff;
+  color: white;
+}
+
 .modal-content {
   background: white;
   padding: 20px;
@@ -312,4 +317,8 @@
 
 .active-year {
   background: #2e2e4f !important;
+}
+
+.months-container {
+  display: none;
 }
