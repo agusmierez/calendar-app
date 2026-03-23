@@ -1,6 +1,6 @@
 :root {
-  --primary: #007bff;
-  --primary-dark: #0056b3;
+  --primary: #d94545;
+  --primary-dark: #a61212;
   --accent: #28a745;
 }
 
@@ -13,7 +13,7 @@
 
 #sidebar {
   width: 250px;
-  background: #1e1e2f;
+  background: var(--primary);
   color: white;
   padding: 10px;
   overflow-y: auto;
@@ -176,11 +176,12 @@
 
 #monthLabel {
   font-weight: bold;
+  color: white;
 }
 
 #sidebar {
   width: 250px;
-  background: #1e1e2f;
+  background: var(--primary-dark);
   color: white;
   padding: 15px;
   overflow-y: auto;
@@ -194,7 +195,7 @@
 }
 
 #yearsList div:hover {
-  background: #2e2e4f;
+  background: var(--primary-dark);
 }
 
 #yearsList .active-month {
@@ -301,7 +302,7 @@
 }
 
 .year-item:hover {
-  background: #2e2e4f !important;
+  background: var(--primary) !important;
 }
 
 /* meses */
@@ -314,7 +315,7 @@
 }
 
 .month-item:hover {
-  background: #3e3e6f !important;
+  background: var(--primary) !important;
 }
 
 .active-month {
@@ -323,30 +324,30 @@
 }
 
 .active-year {
-  background: #2e2e4f !important;
+  background: var(--primary)!important;
 }
 
 .months-container {
   display: none;
 }
 
-#todayBtn {
+/* #todayBtn {
   background: #28a745;
 }
 
 #todayBtn:hover {
   background: #218838;
-}
+} */
 
 .active-today {
-  background: #28a745 !important;
+  background: var(--primary-dark) !important;
   opacity: 1;
 }
 
-#todayBtn {
+/* #todayBtn {
   opacity: 0.7;
   transition: 0.2s;
-}
+} */
 
 .event-item {
   background: var(--primary);
