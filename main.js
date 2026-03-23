@@ -105,6 +105,20 @@ function updateCalendar() {
   renderCalendar(currentYear, currentMonth);
   updateMonthLabel();
   renderYears();
+
+  const todayBtn = document.getElementById("todayBtn");
+  const today = new Date();
+
+  if (
+    currentYear === today.getFullYear() &&
+    currentMonth === today.getMonth() + 1
+  ) {
+    todayBtn.classList.add("active-today");
+  } else {
+    todayBtn.classList.remove("active-today");
+  }
+
+  console.log("updateCalendar corriendo");
 }
 
 // sidebar años
