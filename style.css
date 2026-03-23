@@ -5,6 +5,14 @@
   --primary-light: rgba(217, 69, 69, 0.05);
 }
 
+body {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
+
+#monthLabel {
+  font-weight: 600;
+}
 
 /* layout */
 #app {
