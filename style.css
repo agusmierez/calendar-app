@@ -376,3 +376,29 @@ body {
   background: var(--primary);
   color: white;
 }
+
+@media (orientation: portrait) {
+  #topbar {
+    height: 100px;       /* alto fijo grande */
+    flex: none;          /* que no se estire */
+    padding: 0 12px;
+    font-size: 22px;
+    gap: 15px;
+    align-items: center;
+  }
+
+  #monthLabel {
+    font-size: 22px;
+  }
+
+  #topbar button {
+    font-size: 18px;
+    padding: 10px 14px;
+  }
+
+  #calendar {
+    grid-auto-rows: 120px;                   /* días cuadrados */
+    flex: 1 1 auto;                          /* ocupa solo el espacio disponible */
+    max-height: calc(100vh - 100px - 10px);  /* altura máxima: pantalla menos topbar y padding */
+  }
+}
