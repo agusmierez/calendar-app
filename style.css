@@ -377,6 +377,10 @@ body {
   color: white;
 }
 
+#events-summary {
+  display: none; /* por defecto no se ve */
+}
+
 @media (orientation: portrait) {
   #topbar {
     height: 100px;       /* alto fijo grande */
@@ -398,7 +402,23 @@ body {
 
   #calendar {
     grid-auto-rows: 120px;                   /* días cuadrados */
-    flex: 1 1 auto;                          /* ocupa solo el espacio disponible */
+    flex: 0 0 auto;                          /* ocupa solo el espacio disponible */
     max-height: calc(100vh - 100px - 10px);  /* altura máxima: pantalla menos topbar y padding */
+  }
+
+  #main {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  #events-summary {
+    flex: 1 0 auto;    /* ocupa el espacio sobrante */
+    display: block;
+    padding: 10px;
+    font-size: 13px;
+    background: #fafafa;
+    border-top: 1px solid #ddd;
+    overflow-y: auto;
   }
 }
