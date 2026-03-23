@@ -227,6 +227,17 @@ document.getElementById("nextMonth").addEventListener("click", () => {
   updateCalendar();
 });
 
+const colorPicker = document.getElementById("colorPicker");
+
+colorPicker.addEventListener("input", (e) => {
+  const color = e.target.value;
+
+  document.documentElement.style.setProperty("--primary", color);
+
+  // opcional
+  document.documentElement.style.setProperty("--primary-dark", color);
+});
+
 document.getElementById("todayBtn").addEventListener("click", () => {
   const today = new Date();
 
