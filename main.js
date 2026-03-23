@@ -131,17 +131,16 @@ function updateCalendar() {
 
   const todayBtn = document.getElementById("todayBtn");
   const today = new Date();
-
-  if (
-    currentYear === today.getFullYear() &&
-    currentMonth === today.getMonth() + 1
-  ) {
+  if (currentYear === today.getFullYear() && currentMonth === today.getMonth() + 1) {
     todayBtn.classList.add("active-today");
   } else {
     todayBtn.classList.remove("active-today");
   }
 
   console.log("updateCalendar corriendo");
+
+  // 🔹 actualizar resumen de eventos al final
+  updateEventsSummary();
 }
 
 // sidebar años
@@ -301,6 +300,27 @@ document.getElementById("deleteBtn").onclick = () => {
   modal.classList.add("hidden");
 };
 
+function updateEventsSummary() {
+  const list = document.getElementById("events-list");
+  if (!list) return; // 🔹 evita romper el programa
+
+  list.innerHTML = "";
+
+  const monthEvents = events.filter(e => {
+    const eDate = new Date(e.date);
+    return (
+      eDate.getFullYear() === currentYear &&
+      eDate.getMonth() + 1 === currentMonth
+    );
+  });
+
+  monthEvents.forEach(e => {
+    const li = document.createElement("li");
+    li.textContent = `${e.date.split("-")[2]}: ${e.text}`;
+    list.appendChild(li);
+  });
+}
+
 // init
 updateCalendar();
 renderYears();
@@ -315,3 +335,4 @@ if (savedColor) {
   document.documentElement.style.setProperty("--primary-dark", darker);
   document.documentElement.style.setProperty("--primary-light", light);
 }
+

@@ -413,7 +413,6 @@ body {
   }
 
   #events-summary {
-    flex: 1 0 auto;    /* ocupa el espacio sobrante */
     display: block;
     padding: 10px;
     font-size: 13px;
