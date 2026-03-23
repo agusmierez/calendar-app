@@ -347,3 +347,24 @@
   opacity: 0.7;
   transition: 0.2s;
 }
+
+.event-item {
+  background: var(--primary);
+}
+
+.event-item:hover {
+  background: var(--primary-dark);
+}
+
+#topbar button:hover {
+  background: var(--primary-dark);
+}
+
+.today {
+  border: 2px solid var(--primary);
+}
+
+.active-month {
+  background: var(--primary);
+  color: white;
+}

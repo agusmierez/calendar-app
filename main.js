@@ -1,6 +1,21 @@
 import { createEvent, addEvent, getEventsByDate } from "./core/calendar.js";
 import { loadEvents, saveEvents } from "./storage/local.js";
 
+function darkenColor(hex, percent) {
+  let num = parseInt(hex.replace("#", ""), 16),
+      amt = Math.round(2.55 * percent),
+      R = (num >> 16) - amt,
+      G = (num >> 8 & 0x00FF) - amt,
+      B = (num & 0x0000FF) - amt;
+
+  return "#" + (
+    0x1000000 +
+    (R < 0 ? 0 : R) * 0x10000 +
+    (G < 0 ? 0 : G) * 0x100 +
+    (B < 0 ? 0 : B)
+  ).toString(16).slice(1);
+}
+
 let currentDate = new Date();
 let currentYear = currentDate.getFullYear();
 let currentMonth = currentDate.getMonth() + 1;
@@ -229,14 +244,17 @@ document.getElementById("nextMonth").addEventListener("click", () => {
 
 const colorPicker = document.getElementById("colorPicker");
 
-colorPicker.addEventListener("input", (e) => {
-  const color = e.target.value;
+if (colorPicker) {
+  colorPicker.addEventListener("input", (e) => {
+    const color = e.target.value;
+    const darker = darkenColor(color, 20);
 
-  document.documentElement.style.setProperty("--primary", color);
+    document.documentElement.style.setProperty("--primary", color);
+    document.documentElement.style.setProperty("--primary-dark", darker);
 
-  // opcional
-  document.documentElement.style.setProperty("--primary-dark", color);
-});
+    localStorage.setItem("themeColor", color);
+  });
+}
 
 document.getElementById("todayBtn").addEventListener("click", () => {
   const today = new Date();
@@ -276,3 +294,12 @@ document.getElementById("deleteBtn").onclick = () => {
 // init
 updateCalendar();
 renderYears();
+
+const savedColor = localStorage.getItem("themeColor");
+
+if (savedColor) {
+  const darker = darkenColor(savedColor, 20);
+
+  document.documentElement.style.setProperty("--primary", savedColor);
+  document.documentElement.style.setProperty("--primary-dark", darker);
+}
