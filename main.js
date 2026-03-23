@@ -16,6 +16,14 @@ function darkenColor(hex, percent) {
   ).toString(16).slice(1);
 }
 
+function hexToRgba(hex, alpha) {
+  let r = parseInt(hex.slice(1, 3), 16);
+  let g = parseInt(hex.slice(3, 5), 16);
+  let b = parseInt(hex.slice(5, 7), 16);
+
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
 let currentDate = new Date();
 let currentYear = currentDate.getFullYear();
 let currentMonth = currentDate.getMonth() + 1;
@@ -248,9 +256,11 @@ if (colorPicker) {
   colorPicker.addEventListener("input", (e) => {
     const color = e.target.value;
     const darker = darkenColor(color, 20);
+    const light = hexToRgba(color, 0.05);
 
     document.documentElement.style.setProperty("--primary", color);
     document.documentElement.style.setProperty("--primary-dark", darker);
+    document.documentElement.style.setProperty("--primary-light", light);
 
     localStorage.setItem("themeColor", color);
   });
@@ -299,7 +309,9 @@ const savedColor = localStorage.getItem("themeColor");
 
 if (savedColor) {
   const darker = darkenColor(savedColor, 20);
+  const light = hexToRgba(savedColor, 0.05);
 
   document.documentElement.style.setProperty("--primary", savedColor);
   document.documentElement.style.setProperty("--primary-dark", darker);
+  document.documentElement.style.setProperty("--primary-light", light);
 }

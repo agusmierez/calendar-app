@@ -2,6 +2,7 @@
   --primary: #d94545;
   --primary-dark: #a61212;
   --accent: #28a745;
+  --primary-light: rgba(217, 69, 69, 0.05);
 }
 
 
@@ -115,7 +116,7 @@
 }
 
 .day:hover {
-  background: #f0f6ff;
+  background: var(--primary-light);
   transform: scale(1.02); /* 🔥 leve zoom */
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
@@ -330,14 +331,6 @@
 .months-container {
   display: none;
 }
-
-/* #todayBtn {
-  background: #28a745;
-}
-
-#todayBtn:hover {
-  background: #218838;
-} */
 
 .active-today {
   background: var(--primary-dark) !important;
