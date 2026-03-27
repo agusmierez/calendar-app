@@ -225,6 +225,16 @@ function updateCalendar() {
   if (savedColor) {
     updateEventColors(savedColor);
   }
+
+  const todayEl = document.querySelector(".today");
+
+  if (todayEl) {
+    if (savedColor === "#ffffff") {
+      todayEl.style.border = "2px solid #999"; // gris visible
+    } else {
+      todayEl.style.border = ""; // 🔥 vuelve al CSS original
+    }
+  }
 }
 
 // sidebar años
@@ -343,6 +353,16 @@ if (colorPicker) {
     updateEventColors(color); // 🔥 clave para arreglar eventos blancos
 
     localStorage.setItem("themeColor", color);
+
+    const todayEl = document.querySelector(".today");
+
+    if (todayEl) {
+      if (color === "#ffffff") {
+        todayEl.style.border = "2px solid #999";
+      } else {
+        todayEl.style.border = "";
+      }
+    }
   });
 }
 

@@ -87,6 +87,10 @@ body {
   border: 2px solid var(--primary);
 }
 
+.today.white-today {
+  border: 2px solid #999; /* gris visible */
+}
+
 /* modal */
 .modal {
   position: fixed;
