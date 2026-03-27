@@ -127,7 +127,7 @@ body {
   align-items: center;
 
   background: var(--event-bg);
-  color: var(--event-text);
+  color: var(--topbar-text);
 
   padding: 4px 6px;
   margin-top: 4px;
@@ -144,6 +144,14 @@ body {
 
 .event-item:hover {
   background: var(--primary-dark);
+}
+
+.event-item.white-bg {
+  background: rgba(0, 0, 0, 0.1);   /* gris muy claro para que contraste */
+}
+
+.event-item.white-bg:hover {
+  background: #ddd;       /* gris un poco más oscuro al pasar el mouse */
 }
 
 #topbar {

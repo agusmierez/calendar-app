@@ -56,6 +56,19 @@ function hexToRgba(hex, alpha) {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
+function updateEventColors(bgColor) {
+  document.documentElement.style.setProperty("--event-bg", bgColor);
+
+  // calcular luminancia del color
+  const r = parseInt(bgColor.slice(1,3),16);
+  const g = parseInt(bgColor.slice(3,5),16);
+  const b = parseInt(bgColor.slice(5,7),16);
+  const luminance = 0.299*r + 0.587*g + 0.114*b;
+
+  const textColor = luminance > 186 ? "#000000" : "#ffffff"; // negro si fondo claro
+  document.documentElement.style.setProperty("--event-text", textColor);
+}
+
 function getContrastColor(hex) {
   let r = parseInt(hex.substr(1,2),16);
   let g = parseInt(hex.substr(3,2),16);
@@ -319,6 +332,15 @@ if (colorPicker) {
     applyTheme(color);
 
     localStorage.setItem("themeColor", color);
+
+    const eventItems = document.querySelectorAll(".event-item");
+    eventItems.forEach(item => {
+      if (color === "#ffffff") {       // solo si el usuario eligió blanco
+        item.classList.add("white-bg");
+      } else {
+        item.classList.remove("white-bg");
+      }
+    });
   });
 }
 
