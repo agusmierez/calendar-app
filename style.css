@@ -5,6 +5,8 @@
   --primary-light: rgba(217, 69, 69, 0.05);
   --topbar-text: white;
   --topbar-button-bg: rgba(255,255,255,0.2);
+  --event-bg: var(--primary);
+  --event-text: white;
 }
 
 body {
@@ -80,25 +82,6 @@ body {
   overflow-y: auto;
 }
 
-/* evento */
-/* .event-item {
-  background: var(--topbar-button-bg);
-  color: var(--topbar-text);
-  padding: 3px;
-  margin-top: 3px;
-  border-radius: 4px;
-  font-size: 12px;
-
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  cursor: pointer;
-} */
-
-/* .event-item:hover {
-  background: var(--primary-dark);
-} */
-
 /* hoy */
 .today {
   border: 2px solid var(--primary);
@@ -139,8 +122,13 @@ body {
 }
 
 .event-item {
-  background: var(--primary);
-  color: var(--topbar-text);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: var(--event-bg);
+  color: var(--event-text);
+
   padding: 4px 6px;
   margin-top: 4px;
   border-radius: 6px;
@@ -156,7 +144,6 @@ body {
 
 .event-item:hover {
   background: var(--primary-dark);
-  transform: scale(1.00);
 }
 
 #topbar {
@@ -251,25 +238,6 @@ body {
   transform: scale(1.1);
 }
 
-.event-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  background: var(--primary);
-  color: var(--topbar-text);
-  padding: 4px 6px;
-  margin-top: 4px;
-  border-radius: 6px;
-  font-size: 12px;
-
-  overflow: hidden;
-}
-
-.event-item:hover .event-actions {
-  opacity: 1;
-}
-
 /* texto */
 .event-item span {
   flex: 1;
@@ -360,14 +328,6 @@ body {
   opacity: 0.7;
   transition: 0.2s;
 } */
-
-.event-item {
-  background: var(--primary);
-}
-
-.event-item:hover {
-  background: var(--primary-dark);
-}
 
 #topbar button:hover {
   background: var(--primary-dark);
