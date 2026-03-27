@@ -57,7 +57,11 @@ function hexToRgba(hex, alpha) {
 }
 
 function updateEventColors(bgColor) {
-  document.documentElement.style.setProperty("--event-bg", bgColor);
+  if (bgColor.toLowerCase() === "#ffffff" || bgColor.toLowerCase() === "#fff") {
+    document.documentElement.style.setProperty("--event-bg", "#f0f0f0");
+    document.documentElement.style.setProperty("--event-text", "#000000");
+  } else {
+    document.documentElement.style.setProperty("--event-bg", bgColor);
 
   // calcular luminancia del color
   const r = parseInt(bgColor.slice(1,3),16);
@@ -67,6 +71,7 @@ function updateEventColors(bgColor) {
 
   const textColor = luminance > 186 ? "#000000" : "#ffffff"; // negro si fondo claro
   document.documentElement.style.setProperty("--event-text", textColor);
+  }
 }
 
 function getContrastColor(hex) {
@@ -215,6 +220,11 @@ function updateCalendar() {
 
   // 🔹 actualizar resumen de eventos al final
   updateEventsSummary();
+
+  const savedColor = localStorage.getItem("themeColor");
+  if (savedColor) {
+    updateEventColors(savedColor);
+  }
 }
 
 // sidebar años
@@ -330,17 +340,9 @@ if (colorPicker) {
     const color = e.target.value;
 
     applyTheme(color);
+    updateEventColors(color); // 🔥 clave para arreglar eventos blancos
 
     localStorage.setItem("themeColor", color);
-
-    const eventItems = document.querySelectorAll(".event-item");
-    eventItems.forEach(item => {
-      if (color === "#ffffff") {       // solo si el usuario eligió blanco
-        item.classList.add("white-bg");
-      } else {
-        item.classList.remove("white-bg");
-      }
-    });
   });
 }
 
