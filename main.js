@@ -16,12 +16,65 @@ function darkenColor(hex, percent) {
   ).toString(16).slice(1);
 }
 
+function isDarkColor(hex) {  
+  let r = parseInt(hex.substr(1,2),16);  
+  let g = parseInt(hex.substr(3,2),16);  
+  let b = parseInt(hex.substr(5,2),16);  
+  
+  let brightness = (r*299 + g*587 + b*114) / 1000;  
+  return brightness < 128;  
+}
+
+function lightenColor(hex, percent) {
+  let num = parseInt(hex.replace("#", ""), 16),
+      amt = Math.round(2.55 * percent),
+      R = (num >> 16) + amt,
+      G = (num >> 8 & 0x00FF) + amt,
+      B = (num & 0x0000FF) + amt;
+
+  return "#" + (
+    0x1000000 +
+    (R > 255 ? 255 : R) * 0x10000 +
+    (G > 255 ? 255 : G) * 0x100 +
+    (B > 255 ? 255 : B)
+  ).toString(16).slice(1);
+}
+
+function getHoverColor(hex) {
+  if (isDarkColor(hex)) {
+    return lightenColor(hex, 30);
+  } else {
+    return darkenColor(hex, 20);
+  }
+}
+
 function hexToRgba(hex, alpha) {
   let r = parseInt(hex.slice(1, 3), 16);
   let g = parseInt(hex.slice(3, 5), 16);
   let b = parseInt(hex.slice(5, 7), 16);
 
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+function getContrastColor(hex) {
+  let r = parseInt(hex.substr(1,2),16);
+  let g = parseInt(hex.substr(3,2),16);
+  let b = parseInt(hex.substr(5,2),16);
+
+  let brightness = (r*299 + g*587 + b*114) / 1000;
+
+  return brightness > 150 ? "black" : "white";
+}
+
+function applyTheme(color) {
+  const darker = getHoverColor(color);
+  const light = hexToRgba(color, 0.05);
+  const textColor = getContrastColor(color);
+
+  document.documentElement.style.setProperty("--primary", color);
+  document.documentElement.style.setProperty("--primary-dark", darker);
+  document.documentElement.style.setProperty("--primary-light", light);
+  document.documentElement.style.setProperty("--topbar-text", textColor);
 }
 
 let currentDate = new Date();
@@ -254,12 +307,8 @@ const colorPicker = document.getElementById("colorPicker");
 if (colorPicker) {
   colorPicker.addEventListener("input", (e) => {
     const color = e.target.value;
-    const darker = darkenColor(color, 20);
-    const light = hexToRgba(color, 0.05);
 
-    document.documentElement.style.setProperty("--primary", color);
-    document.documentElement.style.setProperty("--primary-dark", darker);
-    document.documentElement.style.setProperty("--primary-light", light);
+    applyTheme(color);
 
     localStorage.setItem("themeColor", color);
   });
@@ -328,11 +377,5 @@ renderYears();
 const savedColor = localStorage.getItem("themeColor");
 
 if (savedColor) {
-  const darker = darkenColor(savedColor, 20);
-  const light = hexToRgba(savedColor, 0.05);
-
-  document.documentElement.style.setProperty("--primary", savedColor);
-  document.documentElement.style.setProperty("--primary-dark", darker);
-  document.documentElement.style.setProperty("--primary-light", light);
+  applyTheme(savedColor);
 }
-

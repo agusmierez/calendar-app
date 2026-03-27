@@ -3,6 +3,7 @@
   --primary-dark: #a61212;
   --accent: #28a745;
   --primary-light: rgba(217, 69, 69, 0.05);
+  --topbar-text: white;
 }
 
 body {
@@ -25,7 +26,7 @@ body {
 #sidebar {
   width: 250px;
   background: var(--primary);
-  color: white;
+  color: var(--topbar-text);
   padding: 10px;
   overflow-y: auto;
 }
@@ -81,7 +82,7 @@ body {
 /* evento */
 .event-item {
   background: var(--primary);
-  color: white;
+  color: var(--topbar-text);
   padding: 3px;
   margin-top: 3px;
   border-radius: 4px;
@@ -138,7 +139,7 @@ body {
 
 .event-item {
   background: var(--primary);
-  color: white;
+  color: var(--topbar-text);
   padding: 4px 6px;
   margin-top: 4px;
   border-radius: 6px;
@@ -169,7 +170,7 @@ body {
   background: transparent;
   border: none;
   font-size: 20px;
-  color: white;
+  color: var(--topbar-text);
   cursor: pointer;
 }
 
@@ -184,7 +185,7 @@ body {
 #monthControls button {
   background: rgba(255,255,255,0.2);
   border: none;
-  color: white;
+  color: var(--topbar-text);
   padding: 5px 10px;
   border-radius: 6px;
   cursor: pointer;
@@ -192,13 +193,13 @@ body {
 
 #monthLabel {
   font-weight: bold;
-  color: white;
+  color: var(--topbar-text);
 }
 
 #sidebar {
   width: 250px;
   background: var(--primary-dark);
-  color: white;
+  color: var(--topbar-text);
   padding: 15px;
   overflow-y: auto;
   transition: 0.3s;
@@ -216,11 +217,11 @@ body {
 
 #yearsList .active-month {
   background: var(--primary);
-  color: white;
+  color: var(--topbar-text);
 }
 
 .modal-content {
-  background: white;
+  background: var(--topbar-text);
   padding: 20px;
   border-radius: 10px;
 
@@ -237,7 +238,7 @@ body {
 #topbar button {
   background: rgba(255,255,255,0.2);
   border: none;
-  color: white;
+  color: var(--topbar-text);
   padding: 5px 10px;
   border-radius: 6px;
   cursor: pointer;
@@ -255,7 +256,7 @@ body {
   align-items: center;
 
   background: var(--primary);
-  color: white;
+  color: var(--topbar-text);
   padding: 4px 6px;
   margin-top: 4px;
   border-radius: 6px;
@@ -288,7 +289,7 @@ body {
 .event-actions button {
   background: transparent;
   border: none;
-  color: white;
+  color: var(--topbar-text);
   cursor: pointer;
   font-size: 14px;
   padding: 4px;
@@ -336,7 +337,7 @@ body {
 
 .active-month {
   background: var(--primary);
-  color: white;
+  color: var(--topbar-text);
 }
 
 .active-year {
@@ -348,8 +349,10 @@ body {
 }
 
 .active-today {
-  background: var(--primary-dark) !important;
-  opacity: 1;
+  background: white;
+  color: var(--primary) !important;
+  border-radius: 8px;
+  /* box-shadow: 0 2px 6px rgba(0,0,0,0.15); */
 }
 
 /* #todayBtn {
@@ -375,7 +378,7 @@ body {
 
 .active-month {
   background: var(--primary);
-  color: white;
+  color: var(--topbar-text);
 }
 
 #events-summary {
