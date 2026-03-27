@@ -4,6 +4,7 @@
   --accent: #28a745;
   --primary-light: rgba(217, 69, 69, 0.05);
   --topbar-text: white;
+  --topbar-button-bg: rgba(255,255,255,0.2);
 }
 
 body {
@@ -80,8 +81,8 @@ body {
 }
 
 /* evento */
-.event-item {
-  background: var(--primary);
+/* .event-item {
+  background: var(--topbar-button-bg);
   color: var(--topbar-text);
   padding: 3px;
   margin-top: 3px;
@@ -92,11 +93,11 @@ body {
   white-space: nowrap;
   text-overflow: ellipsis;
   cursor: pointer;
-}
+} */
 
-.event-item:hover {
+/* .event-item:hover {
   background: var(--primary-dark);
-}
+} */
 
 /* hoy */
 .today {
@@ -183,7 +184,7 @@ body {
 }
 
 #monthControls button {
-  background: rgba(255,255,255,0.2);
+  background: var(--topbar-button-bg);
   border: none;
   color: var(--topbar-text);
   padding: 5px 10px;
@@ -236,7 +237,7 @@ body {
 }
 
 #topbar button {
-  background: rgba(255,255,255,0.2);
+  background: var(--topbar-button-bg);
   border: none;
   color: var(--topbar-text);
   padding: 5px 10px;
@@ -349,7 +350,7 @@ body {
 }
 
 .active-today {
-  background: white;
+  background: var(--topbar-button-bg);
   color: var(--primary) !important;
   border-radius: 8px;
   /* box-shadow: 0 2px 6px rgba(0,0,0,0.15); */

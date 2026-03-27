@@ -75,6 +75,14 @@ function applyTheme(color) {
   document.documentElement.style.setProperty("--primary-dark", darker);
   document.documentElement.style.setProperty("--primary-light", light);
   document.documentElement.style.setProperty("--topbar-text", textColor);
+
+  if (textColor === "black") {
+    // fondo claro → usamos gris oscuro suave
+    document.documentElement.style.setProperty("--topbar-button-bg", "rgba(0,0,0,0.1)");
+  } else {
+    // fondo oscuro → usamos blanco translúcido
+    document.documentElement.style.setProperty("--topbar-button-bg", "rgba(255,255,255,0.2)");
+  }
 }
 
 let currentDate = new Date();
